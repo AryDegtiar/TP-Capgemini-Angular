@@ -7,6 +7,7 @@ import { GeneralModule } from './general/general.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CarritoComponent } from './carrito/carrito.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     GeneralModule
   ],
   providers: [],
