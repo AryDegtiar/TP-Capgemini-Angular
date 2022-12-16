@@ -1,0 +1,17 @@
+.col-slidetop {
+    position: relative;
+    animation-duration: 3s;
+    animation-name: slide-top;
+}
+
+@keyframes slide-top {
+    from {
+        left: 0px;
+        top: 200px;
+    }
+
+    to {
+        left: 0px;
+        top: 0px;
+    }
+}
