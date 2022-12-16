@@ -5,7 +5,7 @@ import { Input } from '@angular/core';
   selector: 'app-item-producto',
   templateUrl: './item-producto.component.html',
   styleUrls: ['./item-producto.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ItemProductoComponent {
   @Input() producto: any = null;

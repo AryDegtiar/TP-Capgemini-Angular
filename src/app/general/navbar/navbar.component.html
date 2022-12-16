@@ -32,8 +32,7 @@
             Categorias
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Remeras</a></li>
-            <li><a class="dropdown-item" href="#">Pantalones</a></li>
+            <app-item-navbar *ngFor="let categoria of categorias" [categoria]="categoria" ></app-item-navbar>
           </ul>
         </li>
         <li>

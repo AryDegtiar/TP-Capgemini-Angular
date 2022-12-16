@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductoComplementServiceService } from '../producto-service/producto-complement-service.service';
 
 @Component({
@@ -8,25 +8,36 @@ import { ProductoComplementServiceService } from '../producto-service/producto-c
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListadoProductosComponent implements OnInit{
- /*
-  listProductos = [
-    {nombre: 'Producto 1', precio: 100},
-    {nombre: 'Producto 2', precio: 200},
-    {nombre: 'Producto 3', precio: 300},
-    {nombre: 'Producto 4', precio: 400},
-    {nombre: 'Producto 5', precio: 500},
-    {nombre: 'Producto 6', precio: 600},
+/*
+  productos = [
+    {nombre: 'Producto 1', precio: 100, activo: true},
+    {nombre: 'Producto 2', precio: 200, activo: false},
+    {nombre: 'Producto 3', precio: 300, activo: true},
+    {nombre: 'Producto 4', precio: 400,  activo: false},
+    {nombre: 'Producto 5', precio: 500, activo: true},
+    {nombre: 'Producto 6', precio: 600, activo: false},
   ]
-  */
-
-  listProductos: any = [];
 
   constructor(private listProductoService: ProductoComplementServiceService) { }
 
   ngOnInit(): void {
+  }
+
+*/
+
+  productos: any[] = [];
+
+  constructor(private listProductoService: ProductoComplementServiceService,
+    private cdr: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
     this.listProductoService.getProductos().subscribe((data: any) => {
-      this.listProductos = data;
+      console.log(data);
+      this.productos = data;
+      console.log("listProductos:" + this.productos);
+      this.cdr.detectChanges();
     })
   }
+
 
 }
