@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
+import { CarritoComponentService } from 'src/app/carrito/carrito-service/carrito-component.service';
 
 @Component({
   selector: 'app-item-producto',
@@ -7,8 +8,17 @@ import { Input } from '@angular/core';
   styleUrls: ['./item-producto.component.css'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class ItemProductoComponent {
+export class ItemProductoComponent implements OnInit{
   @Input() producto: any = null;
 
+  constructor(private cartService: CarritoComponentService) { }
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  addtoCart() {
+    this.cartService.addProduct(this.producto);
+  }
 
 }

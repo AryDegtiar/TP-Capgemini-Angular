@@ -7,6 +7,7 @@ import { CarritoComponent } from './carrito/carrito.component';
 
 const routes: Routes = [
   {path: '', component: InicioComponent},
+  {path: 'inicio', component: InicioComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   { path: 'productos', loadChildren: () => import('./productos/productos.module').then(m => m.ProductosModule) },

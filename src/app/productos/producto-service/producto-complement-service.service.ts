@@ -9,6 +9,6 @@ export class ProductoComplementServiceService {
   constructor(private http: HttpClient) { }
 
   getProductos() {
-   return this.http.get('http://localhost:8082/publicacion');
+   return this.http.get('http://localhost:8082/publicacion?activo=true');
   }
 }

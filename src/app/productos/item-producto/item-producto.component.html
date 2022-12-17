@@ -27,7 +27,7 @@
     </div>
     <!-- Product actions-->
     <div class="card-footer px-4 py-0 border-top-0 bg-transparent">
-      <div class="text-center"><a [routerLink]="['vista']" class="btn btn-outline-dark mt-auto" >Ver producto</a></div>
+      <div class="text-center"><a (click)="addtoCart()" class="btn btn-outline-dark mt-auto" >Ver producto</a></div>
     </div>
      <p class="text-center color-secundary mt-2" style="font-size: 0.8rem;" > Tienda: {{producto.vendedor.nombreTienda}} </p>
   </div>

@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CarritoComponentService } from 'src/app/carrito/carrito-service/carrito-component.service';
 import { LoginComponentService } from 'src/app/login/login-service/login-component.service';
 import { NarbarComponentService } from './navbar-service/narbar-component.service';
 
@@ -9,19 +10,19 @@ import { NarbarComponentService } from './navbar-service/narbar-component.servic
   styleUrls: ['./navbar.component.css'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class NavbarComponent implements OnInit, AfterViewInit {
+export class NavbarComponent implements OnInit {
   usuario?: any;
 
   categorias: any;
 
+  totalItems : number = 0;
+
   estaVisibleLogInSignUp: boolean = true;
   estaVisibleUsuario: boolean = false;
 
-  constructor(private navbarService: NarbarComponentService,private cdr: ChangeDetectorRef) { }
-
-  ngAfterViewInit(): void {
-    this.cambiarALogInSignUp();
-  }
+  constructor(private navbarService: NarbarComponentService,private cdr: ChangeDetectorRef,
+    private logInService: LoginComponentService,
+    private cartService: CarritoComponentService) { }
 
   ngOnInit(): void {
     this.navbarService.getCategorias().subscribe((data: any) => {
@@ -30,6 +31,19 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       console.log("categorias:" + this.categorias);
       this.cdr.detectChanges();
     });
+
+    this.cartService.getProducts().subscribe((data: any) => {
+      this.totalItems = data.length;
+      this.cdr.detectChanges();
+    });
+
+    /*
+    this.logInService.getBusqueda().subscribe((data: any) => {
+      console.log("ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+      this.cambiarALogInSignUp();
+      this.cdr.detectChanges();
+    });
+*/
 
     this.cambiarALogInSignUp();
 

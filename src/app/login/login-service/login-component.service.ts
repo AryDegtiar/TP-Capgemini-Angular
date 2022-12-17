@@ -22,6 +22,6 @@ export class LoginComponentService {
   }
 
   notificar(){
-    this.nuevaSesion.emit(this.usuario);
+    return this.nuevaSesion.emit(this.usuario);
   }
 }
