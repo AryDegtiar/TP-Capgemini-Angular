@@ -5,7 +5,7 @@
       {{producto?.estadoPublicacion}}
     </div>
     <!-- Product image-->
-    <img class="card-img-top " src={{producto?.urlImagen}} alt="..." style="object-fit: cover; width: 100%; max-height: 260px;"/>
+    <img [routerLink]="['vista', producto.id]" class="card-img-top " src={{producto?.urlImagen}} alt="..." style="object-fit: cover; width: 100%; max-height: 260px;"/>
     <!-- Product details-->
     <div class="card-body p-4">
       <div class="text-center">
@@ -28,7 +28,7 @@
 
     <!-- Product actions-->
     <div class="card-footer px-4 py-0 border-top-0 bg-transparent">
-      <div *ngIf="false">
+      <div *ngIf="true">
       <div class="row">
         <div class="col-4 text-end">
           <button (click)="addtoCart()" class="btn btn-success mt-auto" >
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="text-center"><a (click)="addtoCart()" class="btn btn-outline-dark mt-auto" >Agregar al carrito</a></div>
+    <div *ngIf="false" class="text-center"><a (click)="addtoCart()" class="btn btn-outline-dark mt-auto" >Agregar al carrito</a></div>
 
     </div>
      <p class="text-center color-secundary mt-2" style="font-size: 0.8rem;" > Tienda: {{producto.vendedor.nombreTienda}} </p>

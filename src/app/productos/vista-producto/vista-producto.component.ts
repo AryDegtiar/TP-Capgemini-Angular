@@ -26,8 +26,9 @@ export class VistaProductoComponent implements OnInit{
   }
 
   addtoCart() {
+    console.log("Producto desde view");
+    console.log(this.producto);
     this.cartService.addProduct(this.producto);
-    alert('Producto agregado al carrito');
   }
 
 }

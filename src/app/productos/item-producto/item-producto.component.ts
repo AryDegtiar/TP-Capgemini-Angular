@@ -18,6 +18,8 @@ export class ItemProductoComponent implements OnInit{
   }
 
   addtoCart() {
+    console.log("producto desde item");
+    console.log(this.producto);
     this.cartService.addProduct(this.producto);
     alert('Producto agregado al carrito');
   }

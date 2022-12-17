@@ -21,8 +21,6 @@ export class CarritoComponentService {
   }
 
   addProduct(product: any) {
-    console.log("product: ");
-    console.log(product);
     let productExist = false;
     for (let i in this.cartItemList) {
       if (this.cartItemList[i].id === product.id) {
@@ -36,6 +34,8 @@ export class CarritoComponentService {
       this.cartItemList.push(product);
     }
     this.productList.next(this.cartItemList);
+    console.log("product por servicio: ");
+    console.log(product);
   }
 
   decrementProduct(product: any) {
