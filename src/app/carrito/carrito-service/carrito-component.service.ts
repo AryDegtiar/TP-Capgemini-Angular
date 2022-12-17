@@ -20,34 +20,41 @@ export class CarritoComponentService {
   }
 
   addProduct(product: any) {
-    this.cartItemList.push(product);
+    Object.assign(product, { cantidad: 1});
+    console.log("product: ");
+    console.log(product);
+    let productExist = false;
+    for (let i in this.cartItemList) {
+      if (this.cartItemList[i].id === product.id) {
+        this.cartItemList[i].cantidad += 1;
+        productExist = true;
+        break;
+      }
+    }
+    if (!productExist) {
+      this.cartItemList.push(product);
+    }
     this.productList.next(this.cartItemList);
-    this.getTotalPrice();
-    localStorage.setItem('cartList', JSON.stringify(this.cartItemList));
-    console.log(this.cartItemList);
   }
 
   getTotalPrice(): number {
     let grandTotal = 0;
-    this.cartItemList.map((a: any) => {
-      grandTotal += a.precioTotal;
-    })
+    for (let i in this.cartItemList) {
+      grandTotal += this.cartItemList[i].cantidad * this.cartItemList[i].precio;
+    }
     return grandTotal;
   }
 
   removeCartItem(product: any) {
-    for (let i = 0; i < this.cartItemList.length; i++) {
-      if (this.cartItemList[i].id === product.id) {
-        //this.cartItemList[i].cantidad -= 1;
-        //this.cartItemList[i].precioTotal -= product.precio;
-        //if (this.cartItemList[i].cantidad === 0) {
-          this.cartItemList.splice(i, 1);
-        //}
+    for (let [index, p] of this.cartItemList.entries()) {
+      if (p.id === product.id) {
+        this.cartItemList[index].cantidad -= 1;
+        if (this.cartItemList[index].cantidad == 0) {
+          this.cartItemList.splice(index, 1);
+        }
       }
     }
     this.productList.next(this.cartItemList);
-    this.getTotalPrice();
-    localStorage.setItem('cartList', JSON.stringify(this.cartItemList));
   }
 
   removeAllCart() {

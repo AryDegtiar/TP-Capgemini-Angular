@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginComponentService } from './login-service/login-component.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('usuario', JSON.stringify(usu));
 
       console.log("usuario guardado en local storage");
-      //this.router.navigate(['/']); // QUIRO QUE FUNQUE JEJE
+      //this.router.navigate(['inicio']); // QUIRO QUE FUNQUE JEJE
       //this.router.navigate(['/inicio'])
     });
 

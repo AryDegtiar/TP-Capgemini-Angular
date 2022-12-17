@@ -33,7 +33,11 @@ export class NavbarComponent implements OnInit {
     });
 
     this.cartService.getProducts().subscribe((data: any) => {
-      this.totalItems = data.length;
+      this.totalItems = 0;
+      for (let i = 0; i < data.length; i++) {
+        this.totalItems += data[i].cantidad;
+      }
+
       this.cdr.detectChanges();
     });
 
