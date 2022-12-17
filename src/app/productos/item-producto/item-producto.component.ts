@@ -14,11 +14,12 @@ export class ItemProductoComponent implements OnInit{
   constructor(private cartService: CarritoComponentService) { }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
   }
 
   addtoCart() {
     this.cartService.addProduct(this.producto);
+    alert('Producto agregado al carrito');
   }
 
 }

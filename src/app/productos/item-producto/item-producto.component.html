@@ -25,9 +25,30 @@
         ${{producto.precioTotal}}
       </div>
     </div>
+
     <!-- Product actions-->
     <div class="card-footer px-4 py-0 border-top-0 bg-transparent">
-      <div class="text-center"><a (click)="addtoCart()" class="btn btn-outline-dark mt-auto" >Ver producto</a></div>
+      <div *ngIf="false">
+      <div class="row">
+        <div class="col-4 text-end">
+          <button (click)="addtoCart()" class="btn btn-success mt-auto" >
+            <img
+              style="-webkit-filter: invert(100%);
+              filter: invert(100%);"
+              src="../../../assets/images/carro-de-la-carretilla.png"
+              alt="carrito"
+              width="20"
+              height="20">
+          </button>
+        </div>
+        <div class="col-8">
+         <div class="text-center"><a [routerLink]="['vista', producto.id]" class="btn btn-outline-dark mt-auto" >Ver producto</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center"><a (click)="addtoCart()" class="btn btn-outline-dark mt-auto" >Agregar al carrito</a></div>
+
     </div>
      <p class="text-center color-secundary mt-2" style="font-size: 0.8rem;" > Tienda: {{producto.vendedor.nombreTienda}} </p>
   </div>

@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CarritoComponentService {
+
   public cartItemList : any = [];
   public productList = new BehaviorSubject<any>([]);
 
@@ -20,7 +21,6 @@ export class CarritoComponentService {
   }
 
   addProduct(product: any) {
-    Object.assign(product, { cantidad: 1});
     console.log("product: ");
     console.log(product);
     let productExist = false;
@@ -32,16 +32,29 @@ export class CarritoComponentService {
       }
     }
     if (!productExist) {
+      Object.assign(product, { cantidad: 1});
       this.cartItemList.push(product);
+    }
+    this.productList.next(this.cartItemList);
+  }
+
+  decrementProduct(product: any) {
+    for (let [index, p] of this.cartItemList.entries()) {
+      if (p.id === product.id) {
+        this.cartItemList[index].cantidad -= 1;
+        if (this.cartItemList[index].cantidad == 0) {
+          this.cartItemList.splice(index, 1);
+        }
+      }
     }
     this.productList.next(this.cartItemList);
   }
 
   getTotalPrice(): number {
     let grandTotal = 0;
-    for (let i in this.cartItemList) {
-      grandTotal += this.cartItemList[i].cantidad * this.cartItemList[i].precio;
-    }
+    this.cartItemList.map((a: any) => {
+      grandTotal += a.cantidad * a.precioTotal;
+    })
     return grandTotal;
   }
 
@@ -60,6 +73,14 @@ export class CarritoComponentService {
   removeAllCart() {
     this.cartItemList = [];
     this.productList.next(this.cartItemList);
+  }
+
+  getTotalCant() {
+    let cant = 0;
+    this.cartItemList.map((a: any) => {
+      cant += a.cantidad;
+    })
+    return cant;
   }
 
 }

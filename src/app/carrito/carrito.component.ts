@@ -9,7 +9,9 @@ export class CarritoComponent implements OnInit {
 
   public items: any[] = [];
 
-  public grandTotal!: number;
+  public grandTotal: number = 0;
+
+  public cantItems: number = 0;
 
   constructor(private cartService: CarritoComponentService) { }
 
@@ -17,6 +19,7 @@ export class CarritoComponent implements OnInit {
     this.cartService.getProducts().subscribe((res: any) => {
       this.items = res;
       this.grandTotal = this.cartService.getTotalPrice();
+      this.cantItems = this.cartService.getTotalCant();
 
       console.log("items: ");
       console.log(this.items);
@@ -32,19 +35,11 @@ export class CarritoComponent implements OnInit {
   }
 
   decrement(item: any) {
-    if (item.cantidad > 1){
-      item.cantidad -= 1;
-      this.cartService.setProduct(item);
-      console.log("item: ");
-      console.log(item);
-    }
+    this.cartService.decrementProduct(item);
   }
 
   increment(item: any) {
-    item.cantidad += 1;
-    this.cartService.setProduct(item);
-    console.log("item: ");
-    console.log(item);
+    this.cartService.addProduct(item);
   }
 
 }
