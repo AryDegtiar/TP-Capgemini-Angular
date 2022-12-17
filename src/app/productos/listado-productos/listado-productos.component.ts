@@ -5,7 +5,7 @@ import { ProductoComplementServiceService } from '../producto-service/producto-c
   selector: 'app-listado-productos',
   templateUrl: './listado-productos.component.html',
   styleUrls: ['./listado-productos.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ListadoProductosComponent implements OnInit{
 /*
