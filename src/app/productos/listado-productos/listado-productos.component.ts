@@ -36,7 +36,7 @@ export class ListadoProductosComponent implements OnInit{
       this.productos = data;
       console.log("listProductos:" + this.productos);
       this.cdr.detectChanges();
-    })
+    });
   }
 
 

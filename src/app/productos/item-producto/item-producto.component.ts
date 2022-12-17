@@ -10,4 +10,5 @@ import { Input } from '@angular/core';
 export class ItemProductoComponent {
   @Input() producto: any = null;
 
+
 }

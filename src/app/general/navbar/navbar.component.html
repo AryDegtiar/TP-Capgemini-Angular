@@ -20,7 +20,11 @@
       <ul
         class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
       >
-        <li><a [routerLink]="['/']" class="nav-link px-2 link-secondary">Nombre</a></li>
+        <li>
+          <a [routerLink]="['/']" class="nav-link px-2 link-secondary"
+            >Nombre</a
+          >
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle link-dark"
@@ -32,7 +36,10 @@
             Categorias
           </a>
           <ul class="dropdown-menu">
-            <app-item-navbar *ngFor="let categoria of categorias" [categoria]="categoria" ></app-item-navbar>
+            <app-item-navbar
+              *ngFor="let categoria of categorias"
+              [categoria]="categoria"
+            ></app-item-navbar>
           </ul>
         </li>
         <li>
@@ -51,11 +58,75 @@
         />
       </form>
 
-      <button [routerLink]="['/signup']" type="button" class="btn btn-success me-2">Registrarse</button>
 
-      <button [routerLink]="['/login']" type="button" class="btn btn-outline-success me-2">
-        Iniciar Sesión
-      </button>
+      <div *ngIf="estaVisibleLogInSignUp">
+        <button
+          [routerLink]="['/signup']"
+          type="button"
+          class="btn btn-success me-2"
+        >
+          Registrarse
+        </button>
+
+        <button
+          [routerLink]="['/login']"
+          type="button"
+          class="btn btn-outline-success me-2"
+        >
+          Iniciar Sesión
+        </button>
+      </div>
+
+
+        <a *ngIf="estaVisibleUsuario" [routerLink]="['/carrito']" class="text-decoration-none text-w">
+          <button
+            type="button"
+            class="btn btn-success position-relative me-4"
+          >
+            <img
+              style="-webkit-filter: invert(100%);
+              filter: invert(100%);"
+              src="../../../assets/images/carro-de-la-carretilla.png"
+              alt="carrito"
+              width="20"
+              height="20"
+            />
+            Carrito
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              99+
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </button>
+        </a>
+
+        <div *ngIf="estaVisibleUsuario" class="dropdown text-end">
+          <a
+            href="#"
+            class="d-block link-dark text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt="mdo"
+              width="32"
+              height="32"
+              class="rounded-circle"
+            />
+          </a>
+          <ul class="dropdown-menu text-small mt-2">
+            <li><a class="dropdown-item" href="#">Historial de compras</a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" (click)="logOut()">Cerrar sesion</a></li>
+          </ul>
+        </div>
+
+
+
     </div>
   </div>
 </nav>
