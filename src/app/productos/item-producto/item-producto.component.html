@@ -11,7 +11,7 @@
       <div class="text-center">
 
         <!-- Product name-->
-        <h5 class="fw-bolder"> {{producto?.productoBase.nombre}}  </h5>
+        <h5 class="fw-bolder"> {{producto?.nombre}}  </h5>
         <!-- Product reviews-->
         <div class="d-flex justify-content-center small text-warning mb-2">
           <div class="bi-star-fill"></div>
@@ -30,7 +30,7 @@
     <div class="card-footer px-4 py-0 border-top-0 bg-transparent">
       <div *ngIf="true">
       <div class="row">
-        <div class="col-4 text-end">
+        <div class="col-12 col-md-4 text-center mb-2 mb-md-0 text-md-end">
           <button (click)="addtoCart()" class="btn btn-success mt-auto" >
             <img
               style="-webkit-filter: invert(100%);
@@ -41,7 +41,7 @@
               height="20">
           </button>
         </div>
-        <div class="col-8">
+        <div class="col-12 col-md-8">
          <div class="text-center"><a [routerLink]="['vista', producto.id]" class="btn btn-outline-dark mt-auto" >Ver producto</a></div>
         </div>
       </div>

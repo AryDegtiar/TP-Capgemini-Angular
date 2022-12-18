@@ -13,6 +13,12 @@ export class CarritoComponent implements OnInit {
 
   public cantItems: number = 0;
 
+  metodosPagos: any[] = [];
+
+  metodoPagoInput: any = null;
+
+  direccionInput: any = null;
+
   constructor(private cartService: CarritoComponentService) { }
 
   ngOnInit() {
@@ -20,9 +26,10 @@ export class CarritoComponent implements OnInit {
       this.items = res;
       this.grandTotal = this.cartService.getTotalPrice();
       this.cantItems = this.cartService.getTotalCant();
+      this.metodosPagos = this.cartService.getMetodosPagos();
 
-      console.log("items: ");
-      console.log(this.items);
+      console.log("metodospagos: ");
+      console.log(this.metodosPagos);
     });
   }
 
@@ -40,6 +47,14 @@ export class CarritoComponent implements OnInit {
 
   increment(item: any) {
     this.cartService.addProduct(item);
+  }
+
+  comprar() {
+    if ((this.metodoPagoInput != null && this.direccionInput != null)|| (this.metodoPagoInput != undefined && this.direccionInput != undefined)) {
+      this.cartService.comprar(this.items ,this.metodoPagoInput, this.direccionInput);
+    } else {
+      alert("Debe seleccionar un metodo de pago y una direccion");
+    }
   }
 
 }

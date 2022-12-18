@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
 
     this.loginComponentService.buscarUsuario(this.email, this.password);
 
+
     this.loginComponentService.getBusqueda().subscribe((usu: any) => {
       console.log(usu);
 

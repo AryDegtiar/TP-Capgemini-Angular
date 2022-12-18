@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,7 +10,7 @@ export class CarritoComponentService {
   public cartItemList : any = [];
   public productList = new BehaviorSubject<any>([]);
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getProducts() {
     return this.productList.asObservable();
@@ -89,6 +90,46 @@ export class CarritoComponentService {
       }
     }
     return mismoVendedor;
+  }
+
+  getMetodosPagos(){
+    let metodosPagos = this.cartItemList[0].vendedor.metodoPagos;
+    return metodosPagos;
+  }
+
+  comprar(items:any ,metodoPagoInput:any, direccionInput:any){
+    // creo un arr de idproductos repeditos por la cantidad
+    let productosId = [];
+    for (let i in items) {
+      let cantidad = items[i].cantidad;
+      delete items[i].cantidad;
+      for (let j = 0; j < cantidad; j++){
+        productosId.push(items[i].id);
+      }
+    }
+
+    let cliente = JSON.parse(localStorage.getItem('usuario') || '{}');
+
+    if (cliente.id != undefined && cliente.id != null){
+
+      const body = {
+        publicacionesId: productosId,
+        metodoPagoId: metodoPagoInput,
+        direccionEnvio: direccionInput
+      };
+
+      console.log("publicacionesId: " + body.publicacionesId);
+      console.log("metodoPagoId: " + body.metodoPagoId);
+      console.log("direccionEnvio: " + body.direccionEnvio);
+
+      let res= this.http.post<any>('http://localhost:8082/cliente/' + cliente.id + '/compraRealizadas', body);
+      res.subscribe((data) => {
+        alert('Compra realizada con éxito');
+        this.removeAllCart();
+      });
+    }else{
+      alert('Debe iniciar sesión para realizar la compra');
+    }
   }
 
 }
