@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductoComplementServiceService } from '../producto-service/producto-complement-service.service';
 
 @Component({
@@ -27,10 +28,14 @@ export class ListadoProductosComponent implements OnInit{
 
   productos: any[] = [];
 
+  categoria: any;
+
   constructor(private listProductoService: ProductoComplementServiceService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef, private rutaActiva: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.categoria = this.rutaActiva.snapshot.params['categoria'];
+
     this.listProductoService.getProductos().subscribe((data: any) => {
       console.log(data);
       this.productos = data;

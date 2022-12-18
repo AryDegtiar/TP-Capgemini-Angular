@@ -2,19 +2,19 @@
   <div *ngIf="mostrarHistorial">
     <div *ngFor="let compra of listCompras" class="card my-5 text-center">
       <div class="card-header">
-        ${{compra.total}} - {{compra.metodoPago}}
+        Total: ${{compra.total}} - {{compra.metodoPago}}
       </div>
       <div class="card-body">
         <div class="row">
-          <div *ngFor="let producto of [1,2,3,4]" class="col-12 col-mg-2 col-lg-3 px-2">
+          <div *ngFor="let producto of compra.productos" class="col-12 col-mg-2 col-lg-3 px-2">
             <div class="border border-grey">
-              <h5 class="card-title">Nombre item</h5>
-              <h5 class="card-title">Cantidad: </h5>
-              <h5 class="card-title">$ </h5>
+              <h5 class="card-title">{{producto.nombre}}</h5>
+              <h6 class="card-title">Cantidad: {{producto.cantidad}}</h6>
+              <h5 class="card-title">$ {{producto.precio}}</h5>
             </div>
           </div>
         </div>
-        <p class="card-text">Tienda: | Direccion envio: {{compra.direccionEnvio}}</p>
+        <p class="card-text">Tienda: {{compra.productos[0].tienda}} | Direccion envio: {{compra.direccionEnvio}}</p>
       </div>
       <div class="card-footer text-muted">
         {{compra.fecha}}

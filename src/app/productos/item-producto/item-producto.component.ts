@@ -13,7 +13,13 @@ export class ItemProductoComponent implements OnInit{
 
   constructor(private cartService: CarritoComponentService) { }
 
+  disponible: boolean = false;
+
   ngOnInit(): void {
+
+    if(this.producto.estadoPublicacion == 'DISPONIBLE'){
+      this.disponible = true;
+    }
 
   }
 

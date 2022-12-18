@@ -43,6 +43,7 @@ export class CarritoComponent implements OnInit {
   removeAll() {
     this.cartService.removeAllCart();
     this.metodosPagos = [];
+    this.direccionInput = "";
   }
 
   decrement(item: any) {
@@ -56,6 +57,7 @@ export class CarritoComponent implements OnInit {
   comprar() {
     if ((this.metodoPagoInput != null && this.direccionInput != null)|| (this.metodoPagoInput != undefined && this.direccionInput != undefined)) {
       this.cartService.comprar(this.items ,this.metodoPagoInput, this.direccionInput);
+      this.removeAll();
     } else {
       alert("Debe seleccionar un metodo de pago y una direccion");
     }
