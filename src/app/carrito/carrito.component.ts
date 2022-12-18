@@ -35,10 +35,14 @@ export class CarritoComponent implements OnInit {
 
   removeItem(item: any) {
     this.cartService.removeCartItem(item);
+    if(this.items.length == 0){
+      this.metodosPagos = [];
+    }
   }
 
   removeAll() {
     this.cartService.removeAllCart();
+    this.metodosPagos = [];
   }
 
   decrement(item: any) {

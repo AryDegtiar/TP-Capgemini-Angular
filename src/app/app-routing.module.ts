@@ -4,6 +4,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
+
 
 const routes: Routes = [
   {path: '', component: InicioComponent},
@@ -12,6 +14,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   { path: 'productos', loadChildren: () => import('./productos/productos.module').then(m => m.ProductosModule) },
   {path: 'carrito', component: CarritoComponent},
+  {path: 'historial', component: HistorialComprasComponent},
   {path: '**', redirectTo: ''}
 ];
 
