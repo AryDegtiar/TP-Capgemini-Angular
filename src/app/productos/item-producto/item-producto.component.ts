@@ -18,10 +18,12 @@ export class ItemProductoComponent implements OnInit{
   }
 
   addtoCart() {
-    console.log("producto desde item");
-    console.log(this.producto);
-    this.cartService.addProduct(this.producto);
-    alert('Producto agregado al carrito');
+    if(this.cartService.verificarMismoVendedor(this.producto)){
+      this.cartService.addProduct(this.producto);
+      alert('Producto agregado al carrito');
+    }else{
+      alert('No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito');
+    }
   }
 
 }

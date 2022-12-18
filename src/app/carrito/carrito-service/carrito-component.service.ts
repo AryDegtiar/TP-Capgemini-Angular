@@ -34,8 +34,6 @@ export class CarritoComponentService {
       this.cartItemList.push(product);
     }
     this.productList.next(this.cartItemList);
-    console.log("product por servicio: ");
-    console.log(product);
   }
 
   decrementProduct(product: any) {
@@ -61,10 +59,9 @@ export class CarritoComponentService {
   removeCartItem(product: any) {
     for (let [index, p] of this.cartItemList.entries()) {
       if (p.id === product.id) {
-        this.cartItemList[index].cantidad -= 1;
-        if (this.cartItemList[index].cantidad == 0) {
-          this.cartItemList.splice(index, 1);
-        }
+
+        this.cartItemList.splice(index, 1);
+
       }
     }
     this.productList.next(this.cartItemList);
@@ -81,6 +78,17 @@ export class CarritoComponentService {
       cant += a.cantidad;
     })
     return cant;
+  }
+
+  verificarMismoVendedor(product: any){
+    let mismoVendedor = true;
+    for (let i in this.cartItemList) {
+      if (this.cartItemList[i].vendedor.id !== product.vendedor.id) {
+        mismoVendedor = false;
+        break;
+      }
+    }
+    return mismoVendedor;
   }
 
 }
