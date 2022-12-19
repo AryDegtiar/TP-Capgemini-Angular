@@ -45,15 +45,13 @@ export class NavbarComponent implements OnInit {
       this.cdr.detectChanges();
     });
 
-    /*
-    this.logInService.getBusqueda().subscribe((data: any) => {
-      console.log("ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-      this.cambiarALogInSignUp();
-      this.cdr.detectChanges();
-    });
-*/
-
+    // si al cargar la pagina ya estaba logeado que se cambie a logeado
     this.cambiarALogInSignUp();
+    // si se logea o se registra que se cambie a logeado
+    this.logInService.nuevaSesion.subscribe((data: any) => {
+      console.log("nueva sesion");
+      this.cambiarALogInSignUp();
+    });
 
   }
 

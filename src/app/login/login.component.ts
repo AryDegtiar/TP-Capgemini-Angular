@@ -22,19 +22,17 @@ export class LoginComponent implements OnInit {
     this.email = datosLogIn.target[0].value;
     this.password = datosLogIn.target[1].value;
 
-    this.loginComponentService.buscarUsuario(this.email, this.password);
-
-
-    this.loginComponentService.getBusqueda().subscribe((usu: any) => {
+    this.loginComponentService.buscarUsuario(this.email, this.password).subscribe((usu: any) => {
       console.log(usu);
 
       localStorage.setItem('usuario', JSON.stringify(usu));
 
       console.log("usuario guardado en local storage");
-      this.router.navigate(['inicio']); // QUIRO QUE FUNQUE JEJE
-      //this.router.navigate(['/inicio'])
-    });
 
+      this.loginComponentService.notificar();
+
+      this.router.navigate(['inicio']);
+    });
 
   }
 }
