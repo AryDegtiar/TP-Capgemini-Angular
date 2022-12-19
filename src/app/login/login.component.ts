@@ -10,9 +10,8 @@ import { LoginComponentService } from './login-service/login-component.service';
 export class LoginComponent implements OnInit {
   email: string = "";
   password: string =  "";
-  router: any;
 
-  constructor(private loginComponentService: LoginComponentService) { }
+  constructor(private loginComponentService: LoginComponentService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('usuario', JSON.stringify(usu));
 
       console.log("usuario guardado en local storage");
-      //this.router.navigate(['inicio']); // QUIRO QUE FUNQUE JEJE
+      this.router.navigate(['inicio']); // QUIRO QUE FUNQUE JEJE
       //this.router.navigate(['/inicio'])
     });
 

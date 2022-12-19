@@ -15,4 +15,8 @@ export class ProductoComplementServiceService {
   getProducto(id: any) {
     return this.http.get('http://localhost:8082/publicacion/' + id);
   }
+
+  getProductosByCategoriaId(id: any) {
+    return this.http.get('http://localhost:8082/publicacion?categoriaId=' + id);
+  }
 }

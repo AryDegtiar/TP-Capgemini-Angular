@@ -45,7 +45,7 @@ export class HistorialComprasComponent implements OnInit {
       console.log("lista compras: ");
       console.log(this.listCompras);
 
-      if(this.listCompras != null || this.listCompras != undefined){
+      if(this.listCompras.length > 0){
         this.mostrarHistorial = true;
       }
 

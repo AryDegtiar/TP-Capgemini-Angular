@@ -2,6 +2,8 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, O
 import { CarritoComponentService } from 'src/app/carrito/carrito-service/carrito-component.service';
 import { LoginComponentService } from 'src/app/login/login-service/login-component.service';
 import { NarbarComponentService } from './navbar-service/narbar-component.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -22,13 +24,15 @@ export class NavbarComponent implements OnInit {
 
   constructor(private navbarService: NarbarComponentService,private cdr: ChangeDetectorRef,
     private logInService: LoginComponentService,
-    private cartService: CarritoComponentService) { }
+    private cartService: CarritoComponentService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.navbarService.getCategorias().subscribe((data: any) => {
       console.log(data);
       this.categorias = data._embedded.categorias;
-      console.log("categorias:" + this.categorias);
+      console.log("categorias:");
+      console.log(this.categorias);
       this.cdr.detectChanges();
     });
 
@@ -70,6 +74,9 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('usuario');
     this.estaVisibleLogInSignUp = true;
     this.estaVisibleUsuario = false;
+
+    //how to use router in angular
+    this.router.navigate(['inicio']);
   }
 
 }

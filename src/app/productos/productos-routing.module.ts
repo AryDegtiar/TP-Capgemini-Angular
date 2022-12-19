@@ -6,6 +6,8 @@ import { VistaProductoComponent } from './vista-producto/vista-producto.componen
 const routes: Routes = [
   { path: '', component: ListadoProductosComponent },
   { path: 'vista/:id', component: VistaProductoComponent },
+  { path: 'all', component: ListadoProductosComponent },
+  { path: 'all/:categoriaId', component: ListadoProductosComponent },
 ];
 
 @NgModule({

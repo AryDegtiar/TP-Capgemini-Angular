@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarritoComponentService } from './carrito-service/carrito-component.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class CarritoComponent implements OnInit {
 
   direccionInput: any = null;
 
-  constructor(private cartService: CarritoComponentService) { }
+  constructor(private cartService: CarritoComponentService, private router: Router) { }
 
   ngOnInit() {
     this.cartService.getProducts().subscribe((res: any) => {
@@ -58,6 +59,7 @@ export class CarritoComponent implements OnInit {
     if ((this.metodoPagoInput != null && this.direccionInput != null)|| (this.metodoPagoInput != undefined && this.direccionInput != undefined)) {
       this.cartService.comprar(this.items ,this.metodoPagoInput, this.direccionInput);
       this.removeAll();
+      this.router.navigate(['productos']);
     } else {
       alert("Debe seleccionar un metodo de pago y una direccion");
     }
