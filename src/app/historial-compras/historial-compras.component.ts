@@ -30,6 +30,7 @@ export class HistorialComprasComponent implements OnInit {
         let compra = {
           //compraId: this.historialCompras[i].comprareali_id,
           fecha: this.historialCompras[i].fecha,
+          hora: this.historialCompras[i].hora,
           total: this.historialCompras[i].precioTotal,
           productos:  this.getListDetalleProducto(this.historialCompras[i]),
           metodoPago: this.historialCompras[i].metodoPago,

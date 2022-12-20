@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { CarritoComponentService } from './carrito-service/carrito-component.service';
 
 @Component({
@@ -58,14 +59,20 @@ export class CarritoComponent implements OnInit {
   comprar() {
     if (this.items.length == 0) {
         this.removeAll();
-        alert("No hay productos en el carrito");
+        Swal.fire({
+          icon: 'error',
+          text: 'No hay productos en el carrito'
+        });
       } else{
       if ((this.metodoPagoInput != null && this.direccionInput != null)|| (this.metodoPagoInput != undefined && this.direccionInput != undefined)) {
         this.cartService.comprar(this.items ,this.metodoPagoInput, this.direccionInput);
         this.removeAll();
         this.router.navigate(['productos']);
       } else {
-        alert("Debe seleccionar un metodo de pago y una direccion");
+        Swal.fire({
+          icon: 'error',
+          text: 'Debe seleccionar un metodo de pago y una direccion'
+        });
       }
     }
   }

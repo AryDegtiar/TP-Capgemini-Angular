@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -124,11 +125,28 @@ export class CarritoComponentService {
 
       let res= this.http.post<any>('http://localhost:8082/cliente/' + cliente.id + '/compraRealizadas', body);
       res.subscribe((data) => {
-        alert('Compra realizada con éxito');
+        Swal.fire({
+          title: '¡Gracias por tu compra!',
+          text: 'Nos esforzamos para que tu experiencia sea la mejor posible',
+          width: 600,
+          padding: '3em',
+          color: '#00000',
+          background: '#fff',
+          icon: 'success',
+          backdrop: `
+            rgba(0, 167, 0, 0.2)
+            url("../../../assets/images/Congratulations-Gifs-Transparent-Images.gif")
+            center
+            no-repeat
+          `
+        })
         this.removeAllCart();
       });
     }else{
-      alert('Debe iniciar sesión para realizar la compra');
+      Swal.fire({
+        icon: 'error',
+        text: 'Debe iniciar sesión para realizar la compra'
+      });
     }
   }
 

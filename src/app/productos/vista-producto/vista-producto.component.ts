@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CarritoComponentService } from 'src/app/carrito/carrito-service/carrito-component.service';
+import Swal from 'sweetalert2';
 import { ProductoComplementServiceService } from '../producto-service/producto-complement-service.service';
 
 
@@ -34,12 +35,24 @@ export class VistaProductoComponent implements OnInit{
         for(let i=0; i<this.cantidad; i++){
           this.cartService.addProduct(this.producto);
         }
-        alert('Producto agregado al carrito');
+        Swal.fire({
+          title: 'Articulo agregado al carrito',
+          imageUrl: '../../../assets/images/carro-de-la-carretilla.png',
+          imageWidth: 70,
+          imageHeight: 70,
+          imageAlt: 'Custom image',
+        });
       }else{
-        alert('No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito');
+        Swal.fire({
+          icon: 'error',
+          text: 'No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito'
+        });
       }
     }else{
-      alert('Debe iniciar sesión para agregar productos al carrito');
+      Swal.fire({
+        icon: 'error',
+        text: 'Debe iniciar sesión para agregar productos al carrito'
+      });
     }
   }
 }

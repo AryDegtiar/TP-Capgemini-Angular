@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { CarritoComponentService } from 'src/app/carrito/carrito-service/carrito-component.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-item-producto',
   templateUrl: './item-producto.component.html',
@@ -27,12 +27,24 @@ export class ItemProductoComponent implements OnInit{
     if(localStorage.getItem('usuario') != null) {
       if(this.cartService.verificarMismoVendedor(this.producto)){
         this.cartService.addProduct(this.producto);
-        alert('Producto agregado al carrito');
+        Swal.fire({
+          title: 'Articulo agregado al carrito',
+          imageUrl: '../../../assets/images/carro-de-la-carretilla.png',
+          imageWidth: 70,
+          imageHeight: 70,
+          imageAlt: 'Custom image',
+        });
       }else{
-        alert('No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito');
+        Swal.fire({
+          icon: 'error',
+          text: 'No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito'
+        });
       }
     }else{
-      alert('Debe iniciar sesión para agregar productos al carrito');
+      Swal.fire({
+        icon: 'error',
+        text: 'Debe iniciar sesión para agregar productos al carrito'
+      });
     }
   }
 
