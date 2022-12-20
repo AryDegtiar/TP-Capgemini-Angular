@@ -56,13 +56,19 @@ export class CarritoComponent implements OnInit {
   }
 
   comprar() {
-    if ((this.metodoPagoInput != null && this.direccionInput != null)|| (this.metodoPagoInput != undefined && this.direccionInput != undefined)) {
-      this.cartService.comprar(this.items ,this.metodoPagoInput, this.direccionInput);
-      this.removeAll();
-      this.router.navigate(['productos']);
-    } else {
-      alert("Debe seleccionar un metodo de pago y una direccion");
+    if (this.items.length == 0) {
+        this.removeAll();
+        alert("No hay productos en el carrito");
+      } else{
+      if ((this.metodoPagoInput != null && this.direccionInput != null)|| (this.metodoPagoInput != undefined && this.direccionInput != undefined)) {
+        this.cartService.comprar(this.items ,this.metodoPagoInput, this.direccionInput);
+        this.removeAll();
+        this.router.navigate(['productos']);
+      } else {
+        alert("Debe seleccionar un metodo de pago y una direccion");
+      }
     }
   }
+
 
 }

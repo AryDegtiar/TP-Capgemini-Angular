@@ -10,23 +10,6 @@ import { ProductoComplementServiceService } from '../producto-service/producto-c
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class ListadoProductosComponent implements OnInit{
-/*
-  productos = [
-    {nombre: 'Producto 1', precio: 100, activo: true},
-    {nombre: 'Producto 2', precio: 200, activo: false},
-    {nombre: 'Producto 3', precio: 300, activo: true},
-    {nombre: 'Producto 4', precio: 400,  activo: false},
-    {nombre: 'Producto 5', precio: 500, activo: true},
-    {nombre: 'Producto 6', precio: 600, activo: false},
-  ]
-
-  constructor(private listProductoService: ProductoComplementServiceService) { }
-
-  ngOnInit(): void {
-  }
-
-*/
-
   productos: any[] = [];
 
   categoria: any;
