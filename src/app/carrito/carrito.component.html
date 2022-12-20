@@ -16,12 +16,7 @@
                     <h1 class="fw-bold mb-0 text-black">Carrito de compras</h1>
                     <h6 class="mb-0 text-muted">{{cantItems}} items</h6>
                   </div>
-<!--
-                  <app-item-carrito
-                    *ngFor="let item of items"
-                    [item]="item"
-                  ></app-item-carrito>
--->
+
                   <hr class="my-4" />
 
                   <div *ngFor="let item of items"
@@ -90,10 +85,7 @@
                   <div class="pt-5 row">
                     <div class="col-6 d-flex align-items-center">
                     <h6 class="mb-0">
-                      <a [routerLink]="['/productos']" class="text-body"
-                        ><i class="fas fa-long-arrow-alt-left me-2"></i>Volver a
-                        productos</a
-                      >
+                      <a [routerLink]="['/productos']" class="text-body">Volver a productos</a>
                     </h6>
                   </div>
                   <div class="col-6 text-end">
