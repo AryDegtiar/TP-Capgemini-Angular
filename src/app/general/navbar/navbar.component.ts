@@ -70,8 +70,11 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     localStorage.removeItem('usuario');
+    localStorage.removeItem('carrito');
     this.estaVisibleLogInSignUp = true;
     this.estaVisibleUsuario = false;
+
+    this.cartService.removeAllCart();
 
     //how to use router in angular
     this.router.navigate(['inicio']);

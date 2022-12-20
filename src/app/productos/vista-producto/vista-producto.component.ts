@@ -29,14 +29,17 @@ export class VistaProductoComponent implements OnInit{
   }
 
   addtoCart() {
-    if(this.cartService.verificarMismoVendedor(this.producto)){
-      for(let i=0; i<this.cantidad; i++){
-        this.cartService.addProduct(this.producto);
+    if(localStorage.getItem('usuario') != null) {
+      if(this.cartService.verificarMismoVendedor(this.producto)){
+        for(let i=0; i<this.cantidad; i++){
+          this.cartService.addProduct(this.producto);
+        }
+        alert('Producto agregado al carrito');
+      }else{
+        alert('No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito');
       }
-      alert('Producto agregado al carrito');
     }else{
-      alert('No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito');
+      alert('Debe iniciar sesión para agregar productos al carrito');
     }
   }
-
 }

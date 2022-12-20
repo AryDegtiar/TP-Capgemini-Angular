@@ -24,11 +24,15 @@ export class ItemProductoComponent implements OnInit{
   }
 
   addtoCart() {
-    if(this.cartService.verificarMismoVendedor(this.producto)){
-      this.cartService.addProduct(this.producto);
-      alert('Producto agregado al carrito');
+    if(localStorage.getItem('usuario') != null) {
+      if(this.cartService.verificarMismoVendedor(this.producto)){
+        this.cartService.addProduct(this.producto);
+        alert('Producto agregado al carrito');
+      }else{
+        alert('No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito');
+      }
     }else{
-      alert('No se puede agregar el producto, ya que tiene un vendedor diferente al de carrito');
+      alert('Debe iniciar sesión para agregar productos al carrito');
     }
   }
 
