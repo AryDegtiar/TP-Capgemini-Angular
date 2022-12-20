@@ -19,4 +19,9 @@ export class LoginComponentService {
   notificar(){
     return this.nuevaSesion.emit(this.usuario);
   }
+
+  registrarse(formularioRegistro: any){
+    return this.http.post('http://localhost:8082/cliente', formularioRegistro);
+  }
+
 }

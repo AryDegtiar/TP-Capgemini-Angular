@@ -6,8 +6,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductoComplementServiceService {
 
-  //productosMostrados = new EventEmitter<any>(); se crea para mandarle info a buscador
-
   bodyClick = {
     sumarVisita: true,
   };

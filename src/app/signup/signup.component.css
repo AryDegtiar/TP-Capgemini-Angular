@@ -1,3 +1,7 @@
+.invalido{
+  box-shadow: 0 0 5px red;
+}
+
 a {
   color: rgb(97, 97, 97);
   text-decoration: none;
