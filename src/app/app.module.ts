@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CarritoComponent } from './carrito/carrito.component';
 import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
+import { ProductosModule } from './productos/productos.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HistorialComprasComponent } from './historial-compras/historial-compras
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    GeneralModule
+    GeneralModule,
+    ProductosModule
   ],
   providers: [],
   bootstrap: [AppComponent],
