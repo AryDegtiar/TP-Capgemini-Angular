@@ -25,7 +25,10 @@ export class VistaProductoComponent implements OnInit{
 
     this.productService.getProducto(this.id).subscribe((data: any) => {
       this.producto = data;
+    });
 
+    this.productService.sumarVisita(this.id).subscribe((data: any) => {
+      console.log("sumar visita:" , data);
     });
   }
 

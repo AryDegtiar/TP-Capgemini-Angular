@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductoComplementServiceService {
+  bodyClick = {
+    sumarVisita: true,
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -18,5 +21,13 @@ export class ProductoComplementServiceService {
 
   getProductosByCategoriaId(id: any) {
     return this.http.get('http://localhost:8082/publicacion?categoriaId=' + id);
+  }
+
+  getProductosMasVisitados(cantidadProductos: any){
+    return this.http.get('http://localhost:8082/publicacion/masVisitados/' + cantidadProductos);
+  }
+
+  sumarVisita(id: any) {
+    return this.http.post<any>('http://localhost:8082/publicacion/sumarVisita/' + id, this.bodyClick);
   }
 }
