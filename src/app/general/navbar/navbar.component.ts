@@ -83,17 +83,8 @@ export class NavbarComponent implements OnInit {
   }
 
   buscar(inputValue:any){
-    console.log("location: " ,this.location.path().valueOf());
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-
-    if(this.location.path().valueOf().includes("productos/all")){
-      this.router.navigate([ this.location.path().valueOf() + '/buscar/', inputValue]);
-    }else if(this.location.path().valueOf().includes("buscar")){
-      //this.router.navigate([ this.location.path().valueOf().slice(0, this.location.path().valueOf().lastIndexOf("/buscar")) + '/' + inputValue]);
-      console.log("patch modificado: ", this.location.path().valueOf().lastIndexOf("/buscar"))
-    }else{
-      this.router.navigate(['productos/buscar/', inputValue]);
-    }
+    this.router.navigate(['productos/buscar/', inputValue]);
   }
 
 }

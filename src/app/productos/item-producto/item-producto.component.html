@@ -5,7 +5,7 @@
       {{producto?.estadoPublicacion}}
     </div>
     <!-- Product image-->
-    <img *ngIf="disponible" [routerLink]="['vista', producto.id]" class="card-img-top " src={{producto?.urlImagen}} alt="..." style="object-fit: cover; width: 100%; height: 260px;"/>
+    <img *ngIf="disponible" [routerLink]="['/productos/vista', producto.id]" class="card-img-top " src={{producto?.urlImagen}} alt="..." style="object-fit: cover; width: 100%; height: 260px;"/>
     <img *ngIf="!disponible" class="card-img-top " src={{producto?.urlImagen}} alt="..." style="object-fit: cover; width: 100%; height: 260px;"/>
     <!-- Product details-->
     <div class="card-body p-4">
@@ -43,7 +43,7 @@
               </button>
             </div>
           <div class="col-12 col-md-8">
-           <div class="text-center"><a [routerLink]="['vista', producto.id]" class="btn btn-outline-dark mt-auto" >Ver producto</a></div>
+           <div class="text-center"><a [routerLink]="['/productos/vista', producto.id]" class="btn btn-outline-dark mt-auto" >Ver producto</a></div>
           </div>
       </div>
 
