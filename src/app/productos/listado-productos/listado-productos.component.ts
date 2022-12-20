@@ -16,36 +16,54 @@ export class ListadoProductosComponent implements OnInit{
 
   categoriaId: any;
 
+  buscadorInput = "";
+
   constructor(private productoService: ProductoComplementServiceService,
     private cdr: ChangeDetectorRef, private rutaActiva: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log("categoria antes: " + this.categoriaId);
     this.categoriaId = this.rutaActiva.snapshot.params['categoriaId'];
-    console.log("categoria despues: " + this.categoriaId);
+    this.buscadorInput = this.rutaActiva.snapshot.params['buscadorInput'];
+    console.log("categoriaId:" + this.categoriaId);
+    console.log("buscadorInput:" + this.buscadorInput);
 
     if(this.categoriaId == undefined){
       this.productoService.getProductos().subscribe((data: any) => {
 
-        console.log(data);
         this.productos = data;
         console.log("listProductos:" + this.productos);
         this.cdr.detectChanges();
         this.categoria = "Productos";
+
+        if(this.buscadorInput != undefined){
+          this.productos = this.productos.filter((producto: any) => {
+            return producto.nombre.toLowerCase().includes(this.buscadorInput.toLowerCase());
+          });
+        }
+
+        console.log("listProductos:" + this.productos);
+
     });
     }else{
       this.productoService.getProductosByCategoriaId( this.rutaActiva.snapshot.params['categoriaId'] ).subscribe((data: any) => {
-        console.log(data);
         this.productos = data;
         console.log("listProductos:" + this.productos);
         this.cdr.detectChanges();
         this.categoriaId = undefined;
         this.categoria = data[0].productoBase.categoria.nombre;
+
+        if(this.buscadorInput != undefined){
+          this.productos = this.productos.filter((producto: any) => {
+            return producto.nombre.toLowerCase().includes(this.buscadorInput.toLowerCase());
+          });
+        }
+
       });
     }
 
-
   }
+
+
 
 
 }

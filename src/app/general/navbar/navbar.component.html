@@ -22,7 +22,7 @@
       >
         <li>
           <a [routerLink]="['/']" class="nav-link px-2 link-secondary"
-            >Nombre</a
+            >KarmaShop</a
           >
         </li>
         <li class="nav-item dropdown">
@@ -53,8 +53,10 @@
         <input
           type="search"
           class="form-control"
-          placeholder="Buscar..."
+          placeholder="Buscar.."
           aria-label="Search"
+          #inputValue
+          (keyup.enter)="buscar(inputValue.value)"
         />
       </form>
 

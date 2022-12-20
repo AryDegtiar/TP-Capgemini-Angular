@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoComplementServiceService {
+
+  //productosMostrados = new EventEmitter<any>(); se crea para mandarle info a buscador
+
   bodyClick = {
     sumarVisita: true,
   };

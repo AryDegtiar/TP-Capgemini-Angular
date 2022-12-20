@@ -43,7 +43,12 @@
     </div>
   </div>
 
-  <h1 *ngIf="!mostrarHistorial" class="text-center d-flex justify-content-center align-items-center" style="height: 100vmin;">NO HAY NINGUNA COMPRA REALIZADA</h1>
+  <div *ngIf="!mostrarHistorial" class="text-center">
+    <div class="container">
+      <h1 class="my-4"><b>Historial de compras vacio</b></h1>
+      <img src="../../assets/images/historial-vacio.png" style="width: 100%;">
+    </div>
+  </div>
 
 </div>
 

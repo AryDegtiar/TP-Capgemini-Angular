@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'vista/:id', component: VistaProductoComponent },
   { path: 'all', component: ListadoProductosComponent },
   { path: 'all/:categoriaId', component: ListadoProductosComponent },
+  { path: 'buscar/:buscadorInput', component: ListadoProductosComponent},
+  { path: 'all/:categoriaId/buscar/:buscadorInput', component: ListadoProductosComponent}
 ];
 
 @NgModule({
