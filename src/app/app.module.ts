@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CarritoComponent } from './carrito/carrito.component';
 import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
 import { ProductosModule } from './productos/productos.module';
+import { InicioComponent } from './inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ProductosModule } from './productos/productos.module';
     LoginComponent,
     SignupComponent,
     CarritoComponent,
+    InicioComponent,
     HistorialComprasComponent
   ],
   imports: [

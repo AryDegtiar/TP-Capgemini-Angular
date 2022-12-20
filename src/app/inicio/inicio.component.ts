@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class InicioComponent implements OnInit{
 
   public obtenerProductosMasVisitados : any[] = [];
-  cantidadProductosMasVendidos = 2;
+  cantidadProductosMasVendidos = 4;
 
   constructor(private productoService: ProductoComplementServiceService) { }
 
