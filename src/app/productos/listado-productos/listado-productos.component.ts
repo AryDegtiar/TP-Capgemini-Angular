@@ -18,6 +18,12 @@ export class ListadoProductosComponent implements OnInit{
 
   buscadorInput = "";
 
+  firstElement = 0;
+
+  maxProductos = 4;
+
+  pageActual = 1;
+
   constructor(private productoService: ProductoComplementServiceService,
     private cdr: ChangeDetectorRef, private rutaActiva: ActivatedRoute) { }
 
@@ -27,9 +33,46 @@ export class ListadoProductosComponent implements OnInit{
     console.log("categoriaId:" + this.categoriaId);
     console.log("buscadorInput:" + this.buscadorInput);
 
-    if(this.categoriaId == undefined){
-      this.productoService.getProductos().subscribe((data: any) => {
+    this.mostrarProductosInicialmente(this.firstElement, this.maxProductos);
 
+  }
+
+  previusPage(){
+    //console.log("previusPage");
+    if(this.pageActual >= 2){
+      this.pageActual = this.pageActual - 1 ;
+      this.mostrarProductosInicialmente(this.maxProductos * (this.pageActual-1), this.maxProductos);
+    }
+  }
+
+  nextPage(){
+    if(this.categoriaId == null || this.categoriaId == undefined){
+      this.productoService.getProductos(this.maxProductos * (this.pageActual), this.maxProductos).subscribe((d: any) => {
+        //console.log("data ", d, " length: ", d.length)
+        if(d.length > 0){
+          //console.log("siguiente lleno: " , "first: ", this.maxProductos * (this.pageActual-1), " max: ", this.maxProductos);
+          this.mostrarProductosInicialmente(this.maxProductos * (this.pageActual), this.maxProductos);
+          this.pageActual = this.pageActual + 1;
+        }
+        this.cdr.detectChanges();
+      });
+    }else{
+      this.productoService.getProductosByCategoriaId(this.maxProductos * (this.pageActual), this.maxProductos, this.rutaActiva.snapshot.params['categoriaId'] ).subscribe((d: any) => {
+        //console.log("data ", d, " length: ", d.length)
+        if(d.length > 0){
+          //console.log("siguiente lleno: " , "first: ", this.maxProductos * (this.pageActual-1), " max: ", this.maxProductos);
+          this.mostrarProductosInicialmente(this.maxProductos * (this.pageActual), this.maxProductos);
+          this.pageActual = this.pageActual + 1;
+        }
+        this.cdr.detectChanges();
+      });
+    }
+  }
+
+  mostrarProductosInicialmente(first:any, max:any){
+    console.log("categoria :", this.categoriaId);
+    if(this.categoriaId == undefined){
+      this.productoService.getProductos(first, max).subscribe((data: any) => {
         this.productos = data;
         console.log("listProductos:");
         console.log(this.productos)
@@ -46,11 +89,10 @@ export class ListadoProductosComponent implements OnInit{
 
     });
     }else{
-      this.productoService.getProductosByCategoriaId( this.rutaActiva.snapshot.params['categoriaId'] ).subscribe((data: any) => {
+      this.productoService.getProductosByCategoriaId( first, max , this.rutaActiva.snapshot.params['categoriaId'] ).subscribe((data: any) => {
         this.productos = data;
         console.log("listProductos:" + this.productos);
         this.cdr.detectChanges();
-        this.categoriaId = undefined;
         this.categoria = data[0].productoBase.categoria.nombre;
 
         if(this.buscadorInput != undefined){
@@ -61,10 +103,7 @@ export class ListadoProductosComponent implements OnInit{
 
       });
     }
-
   }
-
-
 
 
 }

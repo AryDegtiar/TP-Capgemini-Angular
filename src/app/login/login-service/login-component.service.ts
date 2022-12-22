@@ -12,8 +12,9 @@ export class LoginComponentService {
 
   constructor(private http: HttpClient) { }
 
-  buscarUsuario(email: string, password: string){
-    return this.http.get('http://localhost:8082/cliente/login?email=' + email + '&password=' + password);
+  buscarUsuario(usu: any){
+    //return this.http.get('http://localhost:8082/cliente/login');
+    return this.http.post('http://localhost:8082/cliente/login', usu)
   }
 
   notificar(){

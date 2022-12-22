@@ -12,16 +12,16 @@ export class ProductoComplementServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getProductos() {
-   return this.http.get('http://localhost:8082/publicacion?activo=true');
+  getProductos(firstElement: any,  maxProductos: any) {
+   return this.http.get('http://localhost:8082/publicacion/firstElement/' + firstElement + '/' + maxProductos + '?activo=true');
   }
 
   getProducto(id: any) {
     return this.http.get('http://localhost:8082/publicacion/' + id);
   }
 
-  getProductosByCategoriaId(id: any) {
-    return this.http.get('http://localhost:8082/publicacion?categoriaId=' + id);
+  getProductosByCategoriaId(firstElement: any,  maxProductos: any, id: any) {
+    return this.http.get('http://localhost:8082/publicacion/firstElement/' + firstElement + '/' + maxProductos +'?categoriaId=' + id);
   }
 
   getProductosMasVisitados(cantidadProductos: any){

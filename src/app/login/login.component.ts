@@ -8,8 +8,6 @@ import { LoginComponentService } from './login-service/login-component.service';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class LoginComponent implements OnInit {
-  email: string = "";
-  password: string =  "";
 
   constructor(private loginComponentService: LoginComponentService, private router: Router) { }
 
@@ -19,10 +17,14 @@ export class LoginComponent implements OnInit {
   logIn(datosLogIn:any){
     datosLogIn.preventDefault();
 
-    this.email = datosLogIn.target[0].value;
-    this.password = datosLogIn.target[1].value;
+    const usu ={
+      mail: datosLogIn.target[0].value,
+      contrasenia: datosLogIn.target[1].value
+    }
 
-    this.loginComponentService.buscarUsuario(this.email, this.password).subscribe((usu: any) => {
+    console.log("usuario" , usu)
+
+    this.loginComponentService.buscarUsuario(usu).subscribe((usu: any) => {
       console.log(usu);
 
       localStorage.setItem('usuario', JSON.stringify(usu));
