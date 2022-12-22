@@ -31,7 +31,8 @@ export class ListadoProductosComponent implements OnInit{
       this.productoService.getProductos().subscribe((data: any) => {
 
         this.productos = data;
-        console.log("listProductos:" + this.productos);
+        console.log("listProductos:");
+        console.log(this.productos)
         this.cdr.detectChanges();
         this.categoria = "Productos";
 
