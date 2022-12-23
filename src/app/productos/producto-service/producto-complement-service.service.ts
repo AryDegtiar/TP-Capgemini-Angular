@@ -13,7 +13,7 @@ export class ProductoComplementServiceService {
   constructor(private http: HttpClient) { }
 
   getProductos(firstElement: any,  maxProductos: any) {
-   return this.http.get('http://localhost:8082/publicacion/firstElement/' + firstElement + '/' + maxProductos + '?activo=true');
+   return this.http.get('http://localhost:8082/publicacion/paginable/' + firstElement + '/' + maxProductos + '?activo=true');
   }
 
   getProducto(id: any) {
@@ -21,7 +21,7 @@ export class ProductoComplementServiceService {
   }
 
   getProductosByCategoriaId(firstElement: any,  maxProductos: any, id: any) {
-    return this.http.get('http://localhost:8082/publicacion/firstElement/' + firstElement + '/' + maxProductos +'?categoriaId=' + id);
+    return this.http.get('http://localhost:8082/publicacion/paginable/' + firstElement + '/' + maxProductos +'?categoriaId=' + id);
   }
 
   getProductosMasVisitados(cantidadProductos: any){
