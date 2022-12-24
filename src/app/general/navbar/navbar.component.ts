@@ -1,9 +1,10 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { CarritoComponentService } from 'src/app/carrito/carrito-service/carrito-component.service';
 import { LoginComponentService } from 'src/app/login/login-service/login-component.service';
 import { NarbarComponentService } from './navbar-service/narbar-component.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 
 
@@ -27,7 +28,8 @@ export class NavbarComponent implements OnInit {
     private logInService: LoginComponentService,
     private cartService: CarritoComponentService,
     private router: Router,
-    private location: Location) { }
+    private location: Location,
+    @Inject(DOCUMENT) document: any) { }
 
   ngOnInit(): void {
     this.navbarService.getCategorias().subscribe((data: any) => {
@@ -84,7 +86,16 @@ export class NavbarComponent implements OnInit {
 
   buscar(inputValue:any){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.navigate(['productos/buscar/', inputValue]);
+    let urlModified = this.location.path();
+    if(urlModified.includes('productos')){
+      if(urlModified.includes('buscar')){
+        urlModified = urlModified.split('buscar')[0];
+      }
+      console.log(urlModified + "/buscar/" + inputValue);
+      this.router.navigate([urlModified + "/buscar/" + inputValue]);
+    }else{
+      this.router.navigate(['productos/buscar/', inputValue]);
+    }
   }
 
 }

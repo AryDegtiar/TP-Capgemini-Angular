@@ -47,63 +47,75 @@ export class ListadoProductosComponent implements OnInit{
 
   nextPage(){
     if(this.categoriaId == null || this.categoriaId == undefined){
-      this.productoService.getProductos(this.maxProductos * (this.pageActual), this.maxProductos).subscribe((d: any) => {
-        //console.log("data ", d, " length: ", d.length)
-        if(d.length > 0){
-          //console.log("siguiente lleno: " , "first: ", this.maxProductos * (this.pageActual-1), " max: ", this.maxProductos);
-          this.mostrarProductosInicialmente(this.maxProductos * (this.pageActual), this.maxProductos);
-          this.pageActual = this.pageActual + 1;
-        }
-        this.cdr.detectChanges();
-      });
+      if(this.buscadorInput == null || this.buscadorInput == undefined){
+        this.productoService.getProductos(this.maxProductos * (this.pageActual), this.maxProductos).subscribe((d: any) => {
+          this.mostrarSiguientePagina(d);
+          this.cdr.detectChanges();
+        });
+      }else{
+        this.productoService.getProductosByBuscadorInput(this.maxProductos * (this.pageActual), this.maxProductos, this.buscadorInput).subscribe((d: any) => {
+          this.mostrarSiguientePagina(d);
+          this.cdr.detectChanges();
+        });
+      }
     }else{
-      this.productoService.getProductosByCategoriaId(this.maxProductos * (this.pageActual), this.maxProductos, this.rutaActiva.snapshot.params['categoriaId'] ).subscribe((d: any) => {
-        //console.log("data ", d, " length: ", d.length)
-        if(d.length > 0){
-          //console.log("siguiente lleno: " , "first: ", this.maxProductos * (this.pageActual-1), " max: ", this.maxProductos);
-          this.mostrarProductosInicialmente(this.maxProductos * (this.pageActual), this.maxProductos);
-          this.pageActual = this.pageActual + 1;
-        }
-        this.cdr.detectChanges();
-      });
+      if(this.buscadorInput == null || this.buscadorInput == undefined){
+        this.productoService.getProductosByCategoriaId(this.maxProductos * (this.pageActual), this.maxProductos, this.rutaActiva.snapshot.params['categoriaId'] ).subscribe((d: any) => {
+          this.mostrarSiguientePagina(d);
+          this.cdr.detectChanges();
+        });
+      }else{
+        this.productoService.getProductosByCategoriaIdAndBuscadorInput(this.maxProductos * (this.pageActual), this.maxProductos, this.rutaActiva.snapshot.params['categoriaId'], this.buscadorInput ).subscribe((d: any) => {
+          this.mostrarSiguientePagina(d);
+          this.cdr.detectChanges();
+        });
+      }
     }
   }
 
   mostrarProductosInicialmente(first:any, max:any){
     console.log("categoria :", this.categoriaId);
     if(this.categoriaId == undefined){
-      this.productoService.getProductos(first, max).subscribe((data: any) => {
-        this.productos = data;
-        console.log("listProductos:");
-        console.log(this.productos)
-        this.cdr.detectChanges();
-        this.categoria = "Productos";
-
-        if(this.buscadorInput != undefined){
-          this.productos = this.productos.filter((producto: any) => {
-            return producto.nombre.toLowerCase().includes(this.buscadorInput.toLowerCase());
-          });
-        }
-
-        console.log("listProductos:" + this.productos);
-
-    });
+      if(this.buscadorInput == undefined){
+        this.productoService.getProductos(first, max).subscribe((data: any) => {
+          this.productos = data;
+          this.cdr.detectChanges();
+          this.categoria = "Productos";
+        });
+      }else{
+        this.productoService.getProductosByBuscadorInput(first, max, this.buscadorInput).subscribe((data: any) => {
+          this.productos = data;
+          this.cdr.detectChanges();
+          this.categoria = "Productos";
+        });
+      }
     }else{
+      if(this.buscadorInput == undefined){
       this.productoService.getProductosByCategoriaId( first, max , this.rutaActiva.snapshot.params['categoriaId'] ).subscribe((data: any) => {
         this.productos = data;
-        console.log("listProductos:" + this.productos);
-        this.cdr.detectChanges();
         this.categoria = data[0].productoBase.categoria.nombre;
-
-        if(this.buscadorInput != undefined){
-          this.productos = this.productos.filter((producto: any) => {
-            return producto.nombre.toLowerCase().includes(this.buscadorInput.toLowerCase());
-          });
-        }
-
+        this.cdr.detectChanges();
       });
+      }else{
+        this.productoService.getProductosByCategoriaIdAndBuscadorInput( first, max , this.rutaActiva.snapshot.params['categoriaId'], this.buscadorInput ).subscribe((data: any) => {
+          this.productos = data;
+          this.categoria = data[0].productoBase.categoria.nombre;
+          this.cdr.detectChanges();
+        });
+      }
+    }
+    if(this.productos.length == 0){
+      this.categoria = "No se encontraron resultados";
     }
   }
+
+  mostrarSiguientePagina(data: any){
+    if(data.length > 0){
+      this.mostrarProductosInicialmente(this.maxProductos * (this.pageActual), this.maxProductos);
+      this.pageActual = this.pageActual + 1;
+    }
+  }
+
 
 
 }

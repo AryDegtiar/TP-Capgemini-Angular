@@ -20,8 +20,17 @@ export class ProductoComplementServiceService {
     return this.http.get('http://localhost:8082/publicacion/' + id);
   }
 
+
   getProductosByCategoriaId(firstElement: any,  maxProductos: any, id: any) {
     return this.http.get('http://localhost:8082/publicacion/paginable/' + firstElement + '/' + maxProductos +'?categoriaId=' + id);
+  }
+
+  getProductosByBuscadorInput(firstElement: any,  maxProductos: any, buscadorInput: any) {
+    return this.http.get('http://localhost:8082/publicacion/paginable/' + firstElement + '/' + maxProductos +'?buscar=' + buscadorInput);
+  }
+
+  getProductosByCategoriaIdAndBuscadorInput(firstElement: any,  maxProductos: any, idCat: any, buscadorInput: any) {
+    return this.http.get('http://localhost:8082/publicacion/paginable/' + firstElement + '/' + maxProductos +'?categoriaId=' + idCat + '&buscar=' + buscadorInput);
   }
 
   getProductosMasVisitados(cantidadProductos: any){
